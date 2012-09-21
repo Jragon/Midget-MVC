@@ -1,10 +1,7 @@
 <?php
 
 class Welcome_model extends Model{
-	function __construct(){
-		//echo 'lol';
-	}
-
+	public $greeting = "hello";
 	function who(){
 		echo 'you!';
 	}

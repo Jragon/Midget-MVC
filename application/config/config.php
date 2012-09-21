@@ -7,9 +7,9 @@ $config['session'] = true;
 $config['deafult_controller'] = "welcome";
 
 // Database settings
-$config['database']['connect']  = true;
+$config['database']['connect']  = false;
 $config['database']['driver']   = "mysql";
 $config['database']['host']     = "localhost";
-$config['database']['dbname']   = "townian";
-$config['database']['username'] = "root";
-$config['database']['password'] = "root";
+$config['database']['dbname']   = "";
+$config['database']['username'] = "";
+$config['database']['password'] = "";

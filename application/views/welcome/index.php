@@ -3,6 +3,6 @@
 	<title><?=$title ?></title>
 </head>
 <body>
-	Smarty's template file says <?=$greeting ?>
+	The view says '<?=$greeting ?>'.
 </body>
 </html>
