@@ -2,7 +2,7 @@
 
 class Welcome_model extends Model{
 	function __construct(){
-		echo 'lol';
+		//echo 'lol';
 	}
 
 	function who(){

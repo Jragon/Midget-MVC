@@ -20,7 +20,6 @@ class Load{
 	public function view($view, $data){
 		// asign filepath
 		$path = APPPATH . "views/" . $view . ".php";
-
 		// asign variables
 		foreach($data as $var => $value){
 			$$var = $value;
