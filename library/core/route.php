@@ -5,21 +5,25 @@ class Route {
 		global $config;
 		if(isset($_SERVER['PATH_INFO'])){
 			$route = explode('/', substr($_SERVER['PATH_INFO'], 1));
-			$controller = ucfirst($route[0]);
+			$controller = ucfirst(strtolower($route[0]));
 			$method = strtolower($route[1]);
 
 			require APPPATH . "controllers/" . $route[0] . ".php";
-			$variables = array();
 			$controller = new $controller;
-			$i = 0;
 
-			foreach($route as $vars){
-				if ($i >= 2)
-					$variables[] = $route[$i];
-				$i++;
+			if(!empty($method)){
+				$variables = array();
+				$i = 0;
+				foreach($route as $vars){
+					if ($i >= 2)
+						$variables[] = $route[$i];
+					$i++;
+				}
+
+				call_user_func_array(array($controller, $method), $variables);
+			}else{
+				$controller->index();
 			}
-
-			call_user_func_array(array($controller, $method), $variables);
 		}else{
 			$controller = $config['deafult_controller'];
 			require APPPATH . "controllers/" . $controller . ".php";
