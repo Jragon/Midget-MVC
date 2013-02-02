@@ -6,23 +6,26 @@ class Route {
 		if(isset($_SERVER['PATH_INFO'])){
 			$route = explode('/', substr($_SERVER['PATH_INFO'], 1));
 			$controller = ucfirst(strtolower($route[0]));
-			$method = strtolower($route[1]);
+			$method = isset($route[1]) ? strtolower($route[1]) : 'index';
 
-			require APPPATH . "controllers/" . $route[0] . ".php";
-			$controller = new $controller;
+			$path = APPPATH . "controllers/" . $route[0] . ".php";
+			if(realpath($path)){
+				require $path;
+				$controller = new $controller;
 
-			if(!empty($method)){
-				$variables = array();
-				$i = 0;
-				foreach($route as $vars){
-					if ($i >= 2)
-						$variables[] = $route[$i];
-					$i++;
+				if($method != 'index'){
+					$variables = array();
+					$i = 0;
+					foreach($route as $vars){
+						if ($i >= 2)
+							$variables[] = $route[$i];
+						$i++;
+					}
+
+					call_user_func_array(array($controller, $method), $variables);
+				}else{
+					$controller->index();
 				}
-
-				call_user_func_array(array($controller, $method), $variables);
-			}else{
-				$controller->index();
 			}
 		}else{
 			$controller = $config['deafult_controller'];
