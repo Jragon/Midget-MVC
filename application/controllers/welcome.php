@@ -2,8 +2,8 @@
 
 class Welcome extends Controller{
 	public function index(){
-		$this->load->model('welcome');
+		$this->welcome = $this->load->model('welcome');
 		$data = array('title' => 'Hellow', 'greeting' => $this->welcome->greeting);
-		$this->load->view('welcome/index', $data);
+		$this->view->render('welcome/index', $data);
 	}
 }
