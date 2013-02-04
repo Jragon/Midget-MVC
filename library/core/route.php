@@ -16,7 +16,7 @@ class Route {
 				else
 					$controller->index();
 			}else{
-				die;
+				return false;
 			}
 		}else{
 			$controller = $this->config['deafult_controller'];
@@ -54,7 +54,9 @@ class Route {
 
 	private function checkPath($path){
 		// not sure how to check this
+		if(file_exists($path) && preg_match("/" , APPPATH . "/i", realpath($path)))
+			return true;
 
-		return true;
+		return false;
 	}
 }
