@@ -8,33 +8,51 @@ class Load{
 
 	// loads a specified model
 	public function model($model){
-		$path = APPPATH . "models" . strtolower($model) . ".php"
+		$path = APPPATH . "models/" . strtolower($model) . ".php";
+		$modelClass = ucfirst($model . '_Model');
 
-		if($this->checkPath($path)){
-			require($path);
-			$modelclass = ucfirst($model . '_Model');
-
-			// call function to include it in the controller
-			return new $modelclass($this->config);
-		}
+		if($this->includePath($path))
+			return new $modelClass($this->config);
 	}
 
-	public function library($library){
-		$path = LIBRARY . "user/" . strtolower($library) . ".php"
+	public function library($library, $config = false){
+		$path = LIBRARY . "user/" . strtolower($library) . ".php";
+		$libraryClass = ucfirst($library . '_library');
 
-		if($this->checkPath($path)){
-			require($path);
-			$libraryclass = ucfirst($library . '_library');
+		if($this->includePath($path))
+			if($config)
+				return new $libraryClass($this->config);
 
-			// call function to include it in the controller
-			return new $libraryclass($this->config);
-		}
+			return new $libraryClass();
+	}
+
+	public function controller($controller, $method, $arguments = false){
+		$path = APPPATH . "controllers/" . strtolower($controller) . ".php";
+		$controller = ucfirst($controller);
+
+		if($this->includePath($path)){
+			$controller = new $controller($this->config, $this);
+
+			if($arguments)
+				call_user_func_array(array($controller, $request['method']), $request['arguments']);
+			else
+				$controller->$method();
+		}		
 	}
 
 	private function checkPath($path){
-		if(file_exists($path) && preg_match("/" , APPPATH . "/i", realpath($path)))
+		if(file_exists($path) && preg_match('/' . preg_quote(BASEPATH, '/') . '/', realpath($path)))
 			return true;
 
 		return false;
+	}
+
+	private function includePath($path){
+		if($this->checkPath($path))
+			require($path);
+		else
+			return false;
+
+		return true;
 	}
 }

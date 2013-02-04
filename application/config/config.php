@@ -4,7 +4,7 @@
 $config['session'] = true;
 
 // Set the deafult controller
-$config['deafult_controller'] = "welcome";
+$config['default_controller'] = "welcome";
 
 // Database settings
 $config['database']['connect']  = false;

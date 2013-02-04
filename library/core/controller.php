@@ -1,8 +1,9 @@
 <?php
 class Controller{
-	function __construct(){
-		global $config;
-		$this->load = new Load();
+	function __construct($config, $load){
+		$this->config = $config;
+
+		$this->load = $load;
 		$this->view = new View();
 	}
 }
