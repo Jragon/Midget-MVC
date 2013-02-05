@@ -6,7 +6,7 @@ if($config['session'])
 
 define('ROOTURL', $config['web_url']);
 
-// include core classes
+// include other classes
 require LIBRARY . "core/controller.php";
 require LIBRARY . "core/model.php";
 require LIBRARY . "core/route.php";
