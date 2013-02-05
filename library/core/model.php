@@ -1,8 +1,10 @@
 <?php
 
 class Model{
-	function __construct(){
-		global $config;
+	function __construct($config, $load){
+		$this->config = $config;
+		$this->load = $load;
+
 		if($config['database']['connect']){
 			try{
 				$this->db = new PDO(

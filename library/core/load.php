@@ -12,7 +12,6 @@ class Load{
 		$modelClass = ucfirst($model . '_Model');
 
 		if($this->includePath($path))
-			return new $modelClass($this->config);
 	}
 
 	public function library($library, $config = false){
