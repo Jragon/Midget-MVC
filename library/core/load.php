@@ -9,7 +9,7 @@ class Load{
 	// loads a specified model
 	public function model($model){
 		$path = APPPATH . "models/" . strtolower($model) . ".php";
-		$modelClass = ucfirst($model . '_Model');
+		$modelClass = ucfirst($model . '_model');
 
 		if($this->includePath($path))
 			return new $modelClass($this->config, $this);
