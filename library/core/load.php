@@ -1,5 +1,4 @@
-<?php
-
+<?
 class Load{
 
 	function __construct($config){
@@ -17,13 +16,8 @@ class Load{
 
 	public function library($library, $config = false){
 		$path = LIBRARY . "user/" . strtolower($library) . ".php";
-		$libraryClass = ucfirst($library . '_library');
 
-		if($this->includePath($path))
-			if($config)
-				return new $libraryClass($this->config);
-
-			return new $libraryClass();
+		return $this->includePath($path);
 	}
 
 	public function controller($controller, $method, $arguments = false){
