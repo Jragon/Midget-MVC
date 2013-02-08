@@ -1,9 +1,9 @@
 <?php
 class Controller{
-	function __construct($config, $load){
-		$this->config = $config;
+	function __construct(){
+		$this->config = Config::getConfig();
 
-		$this->load = $load;
-		$this->view = new View();
+		$this->load = Load::getInstance();
+		$this->view = new View;
 	}
 }

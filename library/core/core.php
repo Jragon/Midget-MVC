@@ -1,10 +1,12 @@
 <?php
 
+//$config = Config::getConfig
+
 // start sessions if need be
-if($config['session'])
+if(Config::getConfig()['session'])
 	session_start();
 
-define('ROOTURL', $config['web_url']);
+define('ROOTURL', Config::getConfig()['web_url']);
 
 // include other classes
 require LIBRARY . "core/controller.php";
@@ -14,5 +16,6 @@ require LIBRARY . "core/load.php";
 require LIBRARY . "core/view.php";
 
 // lets route this bitch
-$route = new Route($config);
+$route = new Route();
 $route->load();
+

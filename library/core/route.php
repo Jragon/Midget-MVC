@@ -2,10 +2,10 @@
 
 class Route {
 	// sets the config variable, which will be passed to the controller
-	function __construct($config){
-		$this->config = $config;
+	function __construct(){
+		$this->config = Config::getConfig();
 
-		$this->load = new Load($config);
+		$this->load = Load::getInstance();
 	}
 
 	public function load(){

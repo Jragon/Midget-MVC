@@ -1,9 +1,18 @@
 <?
 class Load{
 
-	function __construct($config){
-		$this->config = $config;
+    static $instance = null;
+
+	function __construct(){
+		$this->config = Config::getConfig();
 	}
+
+    public static function getInstance() {
+        if (self::$instance == null)
+            self::$instance = new Load();
+       
+        return self::$instance;
+    }
 
 	// loads a specified model
 	public function model($model){
@@ -11,10 +20,10 @@ class Load{
 		$modelClass = ucfirst($model . '_model');
 
 		if($this->includePath($path))
-			return new $modelClass($this->config, $this);
+			return new $modelClass();
 	}
 
-	public function library($library, $config = false){
+	public function library($library){
 		$path = LIBRARY . "user/" . strtolower($library) . ".php";
 
 		return $this->includePath($path);
@@ -25,7 +34,7 @@ class Load{
 		$controller = ucfirst($controller);
 
 		if($this->includePath($path)){
-			$controller = new $controller($this->config, $this);
+			$controller = new $controller();
 
 			if($arguments)
 				call_user_func_array(array($controller, $request['method']), $request['arguments']);
