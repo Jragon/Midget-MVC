@@ -32,10 +32,9 @@ class Route {
 				$i = 0;
 				foreach($route as $vars){
 					if ($i >= 2)
-						$route['arguments'][] = $route[$i];
+						$request['arguments'][] = $route[$i];
 					$i++;
-				}				
-
+				}
 				return $request;
 			}else
 				return false;

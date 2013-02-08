@@ -29,7 +29,7 @@ class Load{
 		return $this->includePath($path);
 	}
 
-	public function controller($controller, $method, $arguments = false){
+	public function controller($controller, $method, $arguments = FALSE){
 		$path = APPPATH . "controllers/" . strtolower($controller) . ".php";
 		$controller = ucfirst($controller);
 
@@ -37,10 +37,12 @@ class Load{
 			$controller = new $controller();
 
 			if($arguments)
-				call_user_func_array(array($controller, $request['method']), $request['arguments']);
+				call_user_func_array(array($controller, $method), $arguments);
 			else
 				$controller->$method();
 		}		
+
+		var_dump($arguments);
 	}
 
 	private function checkPath($path){
